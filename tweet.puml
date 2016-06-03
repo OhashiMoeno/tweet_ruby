@@ -1,0 +1,109 @@
+@startuml
+package domain{
+  package tweet {
+    class Tweet {
+      text: Text
+      url:Url
+      retweet:Retweet
+    }
+    class TweetRepository{
+      getTweets(searchword:SearchWord):List<TextTweet>
+    }
+  }
+
+  package texttweet{
+    class TextTweets {
+      text:Text
+      retweet:Retweet
+      searchword:SearchWord
+    }
+    class TextTweetRepository{
+      overwriting(texttweets:List<TextTweet>)
+      getHotTweet(searchword:SearchWord):List<TextTweet>
+    }
+  }
+
+  package seatchwords{
+    class SearchWords {
+      searchword:SearchWord
+    }
+    class SearchWordsRepository{
+      addWords(searchword:SearchWord):Boolean
+      checkSearchWords(searchword:SearchWord):Boolean
+    }
+  }
+
+
+  class Text extends ValueObject{
+
+  }
+
+  class Url extends ValueObject{
+
+  }
+
+  class Retweet extends ValueObject{
+
+  }
+
+
+  class SearchWord extends ValueObject{
+
+  }
+
+  class ValueObject{
+    value : any
+  }
+
+  class SearchService{
+    SearchWordResult(searchword:SearchWord):WordResult
+  }
+
+  class SearchService -> class SearchWordsRepository
+
+  class CollectionService{
+    timer
+  }
+
+  class CollectionService -> class TweetRepository
+  class CollectionService -> class TextTweetRepository
+
+
+  class GetService{
+    checkSearchWords(searchword:SearchWord):Result
+  }
+  class GetService-> class SearchWordsRepository
+  class GetService -> class TextTweetRepository
+
+  class Result{
+    error:Error
+    value
+  }
+  class Error extends ValueObject{
+
+  }
+
+  class WordResult{
+    message
+  }
+  class OkResult extends WordResult{
+
+  }
+  class AlExRe extends WordResult{
+
+  }
+}
+package infra{
+  class SearchWordsdb extends SearchWordsRepository{
+
+  }
+  class TextTweetdb extends TextTweetRepository{
+
+  }
+
+  class Tweetdb extends TweetRepository{
+
+  }
+
+}
+@enduml

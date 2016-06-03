@@ -1,0 +1,3 @@
+class CollectionService{
+  timer
+}
