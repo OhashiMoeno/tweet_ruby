@@ -1,7 +1,12 @@
 require './infra/texttweetdb.rb'
+require './domain/model/SearchWords.rb'
 class GetService
-  def check_search_words(searchword)
-    text_tweet_db = TextTweetDB.new
-    text_tweet_db.get_hot_tweet(searchword)
+
+  def initialize(text_tweet_repository)
+    @text_tweet_repository = text_tweet_repository
+  end
+
+  def get_hot_tweet(search_words)
+    @text_tweet_repository.get_hot_tweet(search_words)
   end
 end
