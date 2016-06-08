@@ -3,14 +3,6 @@ require 'sqlite3'
 require './infra/tweetdb.rb'
 
 class SearchWordsDB
-  #  < SearchWordsRepository
-
-  #
-  # def add_words(strWord)
-  #   create_db(strWord)
-  #
-  # end
-
   def create_db(searchword)
 
     sql = <<-SQL
@@ -36,7 +28,5 @@ class SearchWordsDB
     db.close
     tweet = TweetDB.new
     tweet.get_tweets(searchword)
-  # def check_search_words
-  # end
  end
 end

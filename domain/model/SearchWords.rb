@@ -1,3 +1,11 @@
 class SearchWords < ValueObject
-@searchword
+  @searchword
+end
+
+class SearchWordsRepository
+  def add_words
+  end
+
+  def check_search_words
+  end
 end

@@ -5,11 +5,18 @@ class TextTweets
 end
 
 
-class Text < ValueObject{
-  text : value
+class Text < ValueObject
+end
 
-}
+class Retweet < ValueObject
+end
 
-class Retweet < ValueObject{
+class TextTweetRepository
+  def get_tweets
+  end
+  def result_tweets
+  end  
 
-}
+
+
+end
