@@ -1,7 +1,8 @@
 require 'sqlite3'
-#require './domain/model/texttweet.rb'
+require './domain/model/texttweet.rb'
+require './domain/model/SearchWords.rb'
 
-class TextTweetDB
+class TextTweetDB < TextTweetRepository
 
   def overwriting(id,text,retweet,searchword,tweettime,url)
     sql = <<-SQL
@@ -32,14 +33,24 @@ class TextTweetDB
     str = "ok!"
   end
 
-  def get_hot_tweet(searchword)
-    str = ""
+  # input
+  #   - search_words: SerchWords
+  #
+  # return List<TextTweet>
+  def get_hot_tweet(search_words)
+    result = []
     sql = "SELECT * FROM TextTweet WHERE searchword = ? and retweet > 0 ORDER BY retweet DESC"
     db =SQLite3::Database.new 'texttweet.db'
-      db.execute(sql, searchword.value) do |row|
-        str += row.join
+      db.execute(sql, search_words.value) do |row|
+        result.push(TextTweet.new(
+          TweetId.new(row[0]),
+          Text.new(row[1]),
+          Retweet.new(row[2]),
+          SearchWords.new(row[3]),
+          TweetTime.new(row[4])
+        ))
       end
       db.close
-      str
+      result
   end
 end

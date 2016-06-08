@@ -5,10 +5,13 @@ require './infra/searchworddb.rb'
 require './domain/model/searchwords.rb'
 require './domain/service/getservice.rb'
 
-
-
-class Word < ValueObject
-
+get '/get/hottweet' do
+  search_words = SearchWords.new(params['word'])
+  getservice = GetService.new(TextTweetDB.new)
+  tweet_list = getservice.get_hot_tweet(search_words)
+  map_list = tweet_list.map {|row| { id: row.id.value, text: row.text.value } }
+  p map_list
+  JSON.generate(map_list)
 end
 
   get '/add/word' do
