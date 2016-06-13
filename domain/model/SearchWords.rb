@@ -1,11 +1,11 @@
+require './domain/model/valueobject.rb'
+
 class SearchWords < ValueObject
-  @searchword
+
 end
 
-class SearchWordsRepository
-  def add_words
-  end
 
-  def check_search_words
+class SearchWordsRepository
+  def put_words(search_words)
   end
 end

@@ -1,12 +1,15 @@
 require './domain/model/valueobject.rb'
 
 class TextTweet
-  attr_reader :id, :text, :retweet, :search_words, :tweet_time
-  def initialize(id, text, retweet, search_words, tweet_time)
-    @id = id
+  attr_reader :tweet_id, :text, :retweet_count, :tweet_time, :tweet_url, :search_words
+
+  def initialize(tweet_id, text, retweet_count, tweet_time, tweet_url,search_words)
+    @tweet_id = tweet_id
     @text = text
-    @search_words = search_words
+    @retweet_count = retweet_count
     @tweet_time = tweet_time
+    @tweet_url = tweet_url
+    @search_words = search_words
   end
 end
 
@@ -16,17 +19,18 @@ end
 class Text < ValueObject
 end
 
-class Retweet < ValueObject
+class RetweetCount < ValueObject
 end
 
 class TweetTime < ValueObject
 end
 
+class TweetUrl < ValueObject
+end
+
 class TextTweetRepository
-  # input
-  #   - search_words: SerchWords
-  #
-  # return List<TextTweet>
+  def overwriting(tweet_list)
+  end
   def get_hot_tweet(search_words)
   end
 end
